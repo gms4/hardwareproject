@@ -17,7 +17,7 @@ module mux_A(
 */
 
 
-wire out1 [31:0];
+wire [31:0] out1;
 
 assign out1 = (selector[0]) ? data_1 : data_0;
 assign data_out = (selector[1]) ? data_2 : out1;

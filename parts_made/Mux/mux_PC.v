@@ -20,11 +20,10 @@ data_3---|
 
 */
 
-wire [31:0] out1,
-wire [31:0] out2
+wire [31:0] out1, out2;
 
-assign out1     (selector[0]) ? data_1 : data_0;
-assign out2     (selector[0]) ? data_3 : data_2;
-assign data_out (selector[1]) ? out2 : out1;
+assign out1     = (selector[0]) ? data_1 : data_0;
+assign out2     = (selector[0]) ? data_3 : data_2;
+assign data_out = (selector[1]) ? out2 : out1;
 
 endmodule

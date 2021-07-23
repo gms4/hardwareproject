@@ -17,13 +17,11 @@ data_1 --|--out1-----------\
 
 */
 
-wire [31:0] out1, 
-wire [31:0] out2, 
-wire [31:0] out3
+wire [31:0] out1, out2, out3;
 
-assign out1 =   (selector[0]) ? data_1 : data_0;
-assign out2 =   (selector[0]) ? 32'd254 : 32'd253;
-assign out3 =   (selector[1]) ? 32'd255 : out2;
-assign data_out (selector[2]) ? out3 : out1;
+assign out1     = (selector[0]) ? data_1 : data_0;
+assign out2     = (selector[0]) ? 32'd254 : 32'd253;
+assign out3     = (selector[1]) ? 32'd255 : out2;
+assign data_out = (selector[2]) ? out3 : out1;
 
 endmodule
