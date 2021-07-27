@@ -10,8 +10,7 @@ wire aux;
 
 assign aux = b[0]; //bit menos significativo: 0 = byte, 1 = halfword
 
-always @ (*)
-    begin
+always @ (*) begin
         if (aux == 0) begin //byte
             data_out = {mdr[31:8], b[7:0]};
         end
