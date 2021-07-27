@@ -150,58 +150,40 @@ parameter Funct_RTE         =       6'b010011;
 parameter Funct_Addm        =       6'b000101;
 
 initial begin
-    //setar variaveis e coisas, uma ideia é colocar reset igual a 1
+    Mux_WR_Registers    =   2'b01;
+    Mux_WD_Registers    =   3'b000;
+    Reg_WR              =   1'b1;
+    Reset_Out           =   1'b1;
+    states              =   State_Fetch;
+    counter             =   5'b00000;
 end
 
 always @(posedge clk) begin
     //RESET
-    if (Reset_In == 1'b1) begin
-        if (states != State_Reset) begin
-            Adress_RG_Load      =   1'b0;
-            EPC_Load            =   1'b0;
-            MDR_Load            =   1'b0;
-            IR_Load             =   1'b0;
-            High_Load           =   1'b0;
-            Low_Load            =   1'b0;
-            A_Load              =   1'b0;
-            B_Load              =   1'b0;
-            ALUOut_Load         =   1'b0;
-            Memory_WR           =   1'b0;
-            Reg_WR              =   1'b0;
-            PCWrite             =   1'b0;
-            IsBEQ               =   1'b0;
-            IsBNE               =   1'b0;
-            IsBLE               =   1'b0;
-            IsBGT               =   1'b0;
-            Reset_Out           =   1'b1;        ////
+    if ((Reset_In == 1'b1) && (states != State_Overflow) && (states != State_Div0) && states != (State_Opcode404)) begin
+        Mux_WR_Registers    =   2'b01;       ////
+        Mux_WD_Registers    =   3'b000;      ////
+        Adress_RG_Load      =   1'b0;
+        EPC_Load            =   1'b0;
+        MDR_Load            =   1'b0;
+        IR_Load             =   1'b0;
+        High_Load           =   1'b0;
+        Low_Load            =   1'b0;
+        A_Load              =   1'b0;
+        B_Load              =   1'b0;
+        ALUOut_Load         =   1'b0;
+        Memory_WR           =   1'b0;
+        Reg_WR              =   1'b1;        ////
+        PCWrite             =   1'b0;
+        IsBEQ               =   1'b0;
+        IsBNE               =   1'b0;
+        IsBLE               =   1'b0;
+        IsBGT               =   1'b0;
+        Reset_Out           =   1'b1;        ////
 
-            //next state
-            states = State_Reset;
-        end else begin
-            Mux_WR_Registers    =   2'b001;      ////
-            Mux_WD_Registers    =   3'b000;      ////
-            Adress_RG_Load      =   1'b0;
-            EPC_Load            =   1'b0;
-            MDR_Load            =   1'b0;        
-            IR_Load             =   1'b0;
-            High_Load           =   1'b0;        
-            Low_Load            =   1'b0;
-            A_Load              =   1'b0;
-            B_Load              =   1'b0;
-            ALUOut_Load         =   1'b0;
-            Memory_WR           =   1'b0;
-            Reg_WR              =   1'b1;        ////
-            PCWrite             =   1'b0;
-            IsBEQ               =   1'b0;
-            IsBNE               =   1'b0;
-            IsBLE               =   1'b0;
-            IsBGT               =   1'b0;
-            Reset_Out           =   1'b0;
-
-            //next state
-            states = State_Fetch;
-            counter = 5'b00000;
-        end 
+        //next state
+        states = State_Fetch;
+        counter = 5'b00000;
     end else begin
         case (states) //descobrir qual estado se esta para tornar o output adequado
             //FETCH
@@ -251,6 +233,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Decode;
                     counter = 5'b00000;
@@ -262,7 +245,7 @@ always @(posedge clk) begin
                 if (counter == 5'b00000) begin
                     Mux_Extend          =   1'b1; ////
                     Mux_ALU1            =   2'b00; ////
-                    Mux_ALU2            =   2'b00; ////
+                    Mux_ALU2            =   2'b11; ////
                     ULA                 =   3'b001; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
@@ -283,7 +266,7 @@ always @(posedge clk) begin
                     Reset_Out           =   1'b0;
 
                     //next state
-                    states = State_Fetch;
+                    states = State_Decode;
                     counter = counter + 5'b00001;
                 end else if (counter == 5'b00001) begin
                     Mux_A               =   2'b01; ////
@@ -751,12 +734,12 @@ always @(posedge clk) begin
                     //next state
                     states = State_Add;
                     counter = counter + 5'b00001;
-                end else if (Overflow) begin
+                end else if (Overflow && counter == 5'b00001) begin
                     //Erro de overflow so deve ser analisado apos o calculo
                     states = State_Overflow;
                     counter = 5'b00000;
                 end else if (counter == 5'b00001) begin
-                    Mux_WR_Registers    =   2'11; ////
+                    Mux_WR_Registers    =   2'b11; ////
                     Mux_WD_Registers    =   3'b010; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
@@ -775,6 +758,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -809,7 +793,7 @@ always @(posedge clk) begin
                     states = State_And;
                     counter = counter + 5'b00001;
                 end else if (counter == 5'b00001) begin
-                    Mux_WR_Registers    =   2'11; ////
+                    Mux_WR_Registers    =   2'b11; ////
                     Mux_WD_Registers    =   3'b010; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
@@ -828,6 +812,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -846,6 +831,7 @@ always @(posedge clk) begin
             State_Jr: begin
                 if (counter == 5'b00000) begin
                     Mux_ALU1            =   2'b01; ////
+                    Mux_ALU2            =   2'b00; ////
                     ULA                 =   3'b000; ////
                     Mux_PC              =   2'b01; ////
                     Adress_RG_Load      =   1'b0;
@@ -875,7 +861,7 @@ always @(posedge clk) begin
             //MFHI
             State_Mfhi: begin
                 if (counter == 5'b00000) begin
-                    Mux_WR_Registers    =   2'11; ////
+                    Mux_WR_Registers    =   2'b11; ////
                     Mux_WD_Registers    =   3'b100; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
@@ -894,6 +880,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -903,7 +890,7 @@ always @(posedge clk) begin
             //MFLO
             State_Mflo: begin
                 if (counter == 5'b00000) begin
-                    Mux_WR_Registers    =   2'11; ////
+                    Mux_WR_Registers    =   2'b11; ////
                     Mux_WD_Registers    =   3'b011; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
@@ -922,6 +909,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -956,7 +944,7 @@ always @(posedge clk) begin
                     states = State_Sll;
                     counter = counter + 5'b00001;
                 end else if (counter == 5'b00001) begin
-                    Mux_WR_Registers    =   2'11; ////
+                    Mux_WR_Registers    =   2'b11; ////
                     Mux_WD_Registers    =   3'b101; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
@@ -975,6 +963,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -1009,7 +998,7 @@ always @(posedge clk) begin
                     states = State_Sllv;
                     counter = counter + 5'b00001;
                 end else if (counter == 5'b00001) begin
-                    Mux_WR_Registers    =   2'11; ////
+                    Mux_WR_Registers    =   2'b11; ////
                     Mux_WD_Registers    =   3'b101; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
@@ -1028,6 +1017,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -1081,6 +1071,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -1134,6 +1125,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -1187,6 +1179,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -1240,6 +1233,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -1273,7 +1267,7 @@ always @(posedge clk) begin
                     //next state
                     states = State_Sub;
                     counter = counter + 5'b00001;
-                end else if (Overflow) begin
+                end else if (Overflow && counter == 5'b00001) begin
                     //Erro de overflow so deve ser analisado apos o calculo
                     states = State_Overflow;
                     counter = 5'b00000;
@@ -1297,6 +1291,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -1327,6 +1322,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -1354,6 +1350,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -1364,7 +1361,9 @@ always @(posedge clk) begin
             State_Addm: begin
                 if (counter == 5'b00000) begin
                     Mux_ALU1            =   2'b01; ////
+                    Mux_ALU2            =   2'b00; ////
                     ULA                 =   3'b000; ////
+                    Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
                     MDR_Load            =   1'b0;
                     IR_Load             =   1'b0;
@@ -1372,7 +1371,7 @@ always @(posedge clk) begin
                     Low_Load            =   1'b0;
                     A_Load              =   1'b0;
                     B_Load              =   1'b0;
-                    ALUOut_Load         =   1'b1;
+                    ALUOut_Load         =   1'b1; ////
                     Memory_WR           =   1'b0;
                     Reg_WR              =   1'b0;
                     PCWrite             =   1'b0;
@@ -1381,6 +1380,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Addm;
                     counter = counter + 5'b00001;
@@ -1403,6 +1403,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Addm;
                     counter = counter + 5'b00001;
@@ -1425,6 +1426,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Addm;
                     counter = counter + 5'b00001;
@@ -1449,6 +1451,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Addm;
                     counter = counter + 5'b00001;
@@ -1471,11 +1474,12 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Addm;
                     counter = counter + 5'b00001;
                 end else if (counter == 5'b01001) begin
-                    Mux_B               =   2'b01; ////
+                    Mux_B               =   1'b1; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
                     MDR_Load            =   1'b0;
@@ -1493,12 +1497,13 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Addm;
                     counter = counter + 5'b00001;
                 end else if (counter == 5'b01010) begin
-                    Mux_ALU1            =   2'b01;
-                    Mux_ALU2            =   2'b00;
+                    Mux_ALU1            =   2'b01; ////
+                    Mux_ALU2            =   2'b00; ////
                     ULA                 =   3'b001; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
@@ -1517,10 +1522,11 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Addm;
                     counter = counter + 5'b00001;
-                end else if (Overflow) begin
+                end else if (Overflow && counter == 5'b01011) begin
                     //Erro de overflow so deve ser analisado apos o calculo
                     states = State_Overflow;
                     counter = 5'b00000;
@@ -1537,13 +1543,14 @@ always @(posedge clk) begin
                     B_Load              =   1'b0;
                     ALUOut_Load         =   1'b0;
                     Memory_WR           =   1'b0;
-                    Reg_WR              =   1'b0;
-                    PCWrite             =   1'b1; ////
+                    Reg_WR              =   1'b1; ////
+                    PCWrite             =   1'b0;
                     IsBEQ               =   1'b0;
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -1574,10 +1581,11 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Addi;
                     counter = counter + 5'b00001;
-                end else if (Overflow) begin
+                end else if (Overflow && counter == 5'b00001) begin
                     //Erro de overflow so deve ser analisado apos o calculo
                     states = State_Overflow;
                     counter = 5'b00000;
@@ -1631,6 +1639,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Addiu;
                     counter = counter + 5'b00001;
@@ -1654,6 +1663,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -1684,6 +1694,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -1714,6 +1725,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -1744,6 +1756,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b1; ////
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -1774,6 +1787,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b1; ////
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -1782,7 +1796,7 @@ always @(posedge clk) begin
 
             //SLLM
             State_Sllm: begin
-                if (counter === 5'b00000) begin
+                if (counter == 5'b00000) begin
                     Mux_ALU1            =   2'b01; ////
                     Mux_ALU2            =   2'b10; ////
                     Mux_Extend          =   1'b1; ////
@@ -1804,14 +1818,15 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Sllm;
                     counter = counter + 5'b00001;
-                end else if (Overflow) begin
+                end else if (Overflow && counter == 5'b00001) begin
                     //Erro de overflow so deve ser analisado apos o calculo
                     states = State_Overflow;
                     counter = 5'b00000;
-                end else if (counter === 5'b00001 || counter === 5'b00010 || counter === 5'b00011) begin
+                end else if (counter == 5'b00001 || counter == 5'b00010 || counter == 5'b00011) begin
                     Mux_Address         =   3'b001; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
@@ -1830,10 +1845,11 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Sllm;
                     counter = counter + 5'b00001;
-                end else if (counter === 5'b00100) begin
+                end else if (counter == 5'b00100) begin
                     Mux_A               =   2'b10; ////
                     Mux_B               =   1'b1; ////
                     Adress_RG_Load      =   1'b0;
@@ -1853,10 +1869,11 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Sllm;
                     counter = counter + 5'b00001;
-                end else if (counter === 5'b00101) begin
+                end else if (counter == 5'b00101) begin
                     Mux_Entrada         =   1'b0; ////
                     Mux_N               =   1'b0; ////
                     Shift               =   3'b010; ////
@@ -1877,10 +1894,11 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Sllm;
                     counter = counter + 5'b00001;
-                end else if (counter === 5'b00110) begin
+                end else if (counter == 5'b00110) begin
                     Mux_WR_Registers    =   2'b00; ////
                     Mux_WD_Registers    =   3'b101; ////
                     Adress_RG_Load      =   1'b0;
@@ -1900,6 +1918,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -1930,10 +1949,11 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Lb;
                     counter = counter + 5'b00001;
-                end else if (Overflow) begin
+                end else if (Overflow && counter == 5'b00001) begin
                     //Erro de overflow so deve ser analisado apos o calculo
                     states = State_Overflow;
                     counter = 5'b00000;
@@ -1956,6 +1976,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Lb;
                     counter = counter + 5'b00001;
@@ -1977,6 +1998,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Lb;
                     counter = counter + 5'b00001;
@@ -2001,6 +2023,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -2031,10 +2054,11 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Lh;
                     counter = counter + 5'b00001;
-                end else if (Overflow) begin
+                end else if (Overflow && counter == 5'b00001) begin
                     //Erro de overflow so deve ser analisado apos o calculo
                     states = State_Overflow;
                     counter = 5'b00000;
@@ -2057,6 +2081,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Lh;
                     counter = counter + 5'b00001;
@@ -2078,6 +2103,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Lh;
                     counter = counter + 5'b00001;
@@ -2102,6 +2128,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -2132,6 +2159,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Lui;
                     counter = counter + 5'b00001;
@@ -2155,6 +2183,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -2185,10 +2214,11 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Lw;
                     counter = counter + 5'b00001;
-                end else if (Overflow) begin
+                end else if (Overflow && counter == 5'b00001) begin
                     //Erro de overflow so deve ser analisado apos o calculo
                     states = State_Overflow;
                     counter = 5'b00000;
@@ -2211,6 +2241,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Lw;
                     counter = counter + 5'b00001;
@@ -2232,6 +2263,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Lw;
                     counter = counter + 5'b00001;
@@ -2256,6 +2288,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -2286,10 +2319,11 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Sb;
                     counter = counter + 5'b00001;
-                end else if (Overflow) begin
+                end else if (Overflow && counter == 5'b00001) begin
                     //Erro de overflow so deve ser analisado apos o calculo
                     states = State_Overflow;
                     counter = 5'b00000;
@@ -2312,6 +2346,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Sb;
                     counter = counter + 5'b00001;
@@ -2333,6 +2368,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Sb;
                     counter = counter + 5'b00001;
@@ -2357,6 +2393,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -2387,10 +2424,11 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Sh;
                     counter = counter + 5'b00001;
-                end else if (Overflow) begin
+                end else if (Overflow && counter == 5'b00001) begin
                     //Erro de overflow so deve ser analisado apos o calculo
                     states = State_Overflow;
                     counter = 5'b00000;
@@ -2413,6 +2451,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Sh;
                     counter = counter + 5'b00001;
@@ -2434,6 +2473,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Sh;
                     counter = counter + 5'b00001;
@@ -2458,6 +2498,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -2488,8 +2529,9 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
-                    states = State_Sw;
+                    states = State_Slti;
                     counter = counter + 5'b00001;
                 end else if (counter == 5'b00001) begin
                     Mux_WR_Registers    =   2'b00; ////
@@ -2503,14 +2545,15 @@ always @(posedge clk) begin
                     A_Load              =   1'b0;
                     B_Load              =   1'b0;
                     ALUOut_Load         =   1'b0;
-                    Memory_WR           =   1'b1; ////
-                    Reg_WR              =   1'b0;
+                    Memory_WR           =   1'b0;
+                    Reg_WR              =   1'b1; ////
                     PCWrite             =   1'b0;
                     IsBEQ               =   1'b0;
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -2541,9 +2584,14 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Sw;
                     counter = counter + 5'b00001;
+                end else if (Overflow && counter == 5'b00001) begin
+                    //Erro de overflow so deve ser analisado apos o calculo
+                    states = State_Overflow;
+                    counter = 5'b00000;
                 end else if (counter == 5'b00001) begin
                     Mux_Address         =   3'b001; ////
                     Mux_WD_Memory       =   1'b0; ////                    
@@ -2564,6 +2612,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -2591,6 +2640,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -2620,6 +2670,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Jal;
                     counter = counter + 5'b00001;
@@ -2644,6 +2695,7 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -2656,43 +2708,3 @@ always @(posedge clk) begin
 end
 
 endmodule
-
-/*
-Add 
-And
-Div
-Mult
-Jr
-Mfhi
-Mflo
-Sll
-Sllv
-Slt
-Sra
-Srav
-Srl
-Sub
-Break
-RTE
-Addm
-
-Addi
-Addiu
-Beq
-Bne
-Ble
-Bgt
-Sllm
-Lb
-Lh
-Lui
-Lw
-Sb
-Sh
-Slti
-Sw
-
-J
-Jal
-
-*/
