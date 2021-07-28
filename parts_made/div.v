@@ -32,4 +32,36 @@ module mult (
 			fim = 0;
 			divRun = 0;
 		end
+        else if(divInit)begin
+            if(divRun)begin
+                if(digitoAtual!=6'b111111)begin//-1
+                    resto = {resto[30:0],dividendo[digitoAtual]};
+                    if(resto>=divisor)begin
+                        resto = resto - divisor;
+                        quociente = {quociente[30:0],1'b1};  
+                    end
+                    else begin
+                        quociente = {quociente[30:0],1'b0};
+                    end
+                    digitoAtual <= digitoAtual-1'b1;
+                    c <= c+1'b1;
+                end
+                else begin
+                    divRun=0;
+                    fim=1;
+                end
+            end
+            else begin
+                if(fim==0)begin
+                    dividendo = value_A;
+                    divisor  = value_B;
+                    digitoAtual = 5'b11111;//31
+                    divRun = 1;
+                end
+                else begin
+                    fim = 0;
+                end
+            end
+        end
     end
+endmodule
