@@ -29,3 +29,10 @@ assign low = c < 6'b100000;
             fim<=0;
         end
     end
+    else if (multInit) begin
+        if(multRun)begin
+            //algoritmo de mult
+        end
+        else begin
+            //aqui os valores dos inputs de A e B são recebidos
+        end
