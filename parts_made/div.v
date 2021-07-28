@@ -12,3 +12,8 @@ module mult (
  if divisor is larger, shift 0 as the next bit of the quotient 
  if divisor is smaller, subtract to get new dividend and shift 1 as the next bit of the quotient
 */	
+    reg divRun,fim;
+    reg [31:0] resto,divisor;
+    reg [31:0] dividendo,quociente;
+    reg [5:0] digitoAtual;
+    reg [5:0] c;
