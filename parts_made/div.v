@@ -21,4 +21,15 @@ module mult (
     assign hi=quociente;
 	assign lo=resto;
 
-    
+    always @ (posedge clk) begin
+		if (reset)begin
+			resto=32'b0;
+			divisor=32'b0;
+			dividendo=32'b0;
+			quociente=32'b0;
+			digitoAtual=5'b0;
+			c=5'b0;
+			fim = 0;
+			divRun = 0;
+		end
+    end
