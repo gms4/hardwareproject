@@ -17,3 +17,8 @@ module mult (
     reg [31:0] dividendo,quociente;
     reg [5:0] digitoAtual;
     reg [5:0] c;
+
+    assign hi=quociente;
+	assign lo=resto;
+
+    
