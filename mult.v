@@ -15,3 +15,6 @@ reg test;
 reg multRun,fim;
 reg [31:0] sum, diff;
 
+assign hi = {r, q};
+assign low = c < 6'b100000;
+
