@@ -8,3 +8,10 @@ module mult (
     output [31:0] hi,
     output [31:0] low
 );
+
+reg [31:0] m, q, r; 
+reg [5:0] c;
+reg test;
+reg multRun,fim;
+reg [31:0] sum, diff;
+
