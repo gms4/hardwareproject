@@ -19,5 +19,13 @@ assign hi = {r, q};
 assign low = c < 6'b100000;
 
     always @(posedge clk) begin
-
+        if(reset)begin
+            m<= 32'b0; 
+            q<= 32'b0; 
+            r<= 32'b0;
+            c<=6'b0;
+            test<=1'b0;
+            multRun<=0;
+            fim<=0;
+        end
     end
