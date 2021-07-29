@@ -526,7 +526,7 @@ module cpu (
         IsBLE,
         IsBGT,
 
-        ULA, //wilson vai fazer
+        ALU, //wilson vai fazer
         Shift,
         Reset_Out,
         
