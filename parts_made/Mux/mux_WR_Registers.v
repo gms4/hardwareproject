@@ -1,7 +1,7 @@
 module mux_WR_Registers(
 
     input  wire [1:0]  selector,
-    input  wire [20:16] data_0, //instruction [20..16]
+    input  wire [4:0] data_0, //instruction [20..16]
     input  wire [15:0] data_3, //instruction [15..11]
     output wire [4:0] data_out 
 

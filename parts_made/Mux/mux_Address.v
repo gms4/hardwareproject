@@ -1,4 +1,4 @@
-module mux_B(
+module mux_Address (
 
     input  wire [2:0]  selector,
     input  wire [31:0] data_0,
