@@ -14,17 +14,18 @@ module mult (
 	reg stop,runMult,fim;
 	
     assign multStop = stop;
-    
     always @(posedge clk) begin
-      if(reset)begin
-  	 m<= 32'b0; 
-         q<= 32'b0; 
-         r<= 32'b0;
-   	 c<=6'b0;
-    	 test<=1'b0;
-   	 multRun<=0;
-         fim<=0;
-      end
+		if(reset) begin
+			AeQeQ_1 = 65'b0;
+			m = 65'b0;
+			complemento_2 = 65'b0;
+			c = 6'b0;
+			complemento_2_65_bits = 32'b0;
+			runMult = 1'b0;
+			fim = 1'b0;
+			stop=0;
+		end
+        
       else if (multInit) begin
         if(multRun)begin
 		if (c!=6'b100000) begin
