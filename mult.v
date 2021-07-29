@@ -43,5 +43,12 @@ module mult (
 						end
 						c<=c+1;
 					end
-end
+                    else begin
+						hi = AeQeQ_1[64:33];
+						lo = AeQeQ_1[32:1];
+						runMult = 0;
+						fim = 1;
+						stop = 1;
+					end
+				end
 endmodule
