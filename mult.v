@@ -25,38 +25,23 @@ module mult (
 			fim = 1'b0;
 			stop=0;
 		end
-        
-      else if (multInit) begin
-        if(multRun)begin
-		if (c!=6'b100000) begin
-        		case ({q[0], test})
-        			2'b0_1 :begin//soma entre r e m
-					sum=r+m;
-					{r, q, test} <= {sum[31], sum, q};
-			  	end
-       				2'b1_0 : begin //subtracao
-					diff = r-m;
-					{r, q, test} <= {diff[31], diff, q};
-		 	 	end	
-        			default: {r, q, test} <= {r[31], r, q};//deslocamento
-        		endcase
-        		c <= c + 1'b1;
-      		end
-		else begin
-			multRun=1'b0;
-			fim = 1'b1;
-		end
-	end		
-	else begin
-		if(fim==0)begin
-			m <=  value_A_Mc;
-        		q <=  value_B_Mp;
-			multRun<=1'b1;
-		end
-		else begin
-			fim=0;
-		end
-	end
-    end
+    else begin
+			if (multInit) begin
+				if(runMult)begin
+					if (c<6'b100000)begin
+						if(AeQeQ_1[1]!=AeQeQ_1[0])begin
+							if(AeQeQ_1[0]==0)begin //subracao por  isso usa temp pois ja e o complemento de 2
+								AeQeQ_1=AeQeQ_1+ complemento_2;
+							end
+							else begin
+								AeQeQ_1=AeQeQ_1+ m;
+							end
+						end
+						AeQeQ_1=AeQeQ_1>>>1;
+						if(AeQeQ_1[63]==1)begin
+							AeQeQ_1[64]=1'b1;
+						end
+						c<=c+1;
+					end
 end
 endmodule
