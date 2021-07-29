@@ -5,6 +5,7 @@ module mult (
     input wire divInit,
     input wire divStop,
     input wire reset,
+    output wire divZero,
     output wire [31:0] hi,
     output wire [31:0] lo
 );
@@ -13,7 +14,7 @@ module mult (
  if divisor is larger, shift 0 as the next bit of the quotient 
  if divisor is smaller, subtract to get new dividend and shift 1 as the next bit of the quotient
 */	
-    reg divRun,fim,stop;
+    reg divRun,fim,stop,erroDivZero;
     reg [31:0] resto,divisor;
     reg [31:0] dividendo,quociente;
     reg [5:0] digitoAtual;
@@ -23,11 +24,15 @@ module mult (
 	assign lo = quociente;
 
     assign divStop = stop;
+    assign divZero = erroDivZero;
     always @ (posedge clk) begin
-        if(divStop)begin
+        if(divZero)begin
+		    erroDivZero = 0;
+	    end
+        else if(divStop)begin
 			stop = 0;
 		end
-		if (reset)begin
+		else if (reset)begin
 			resto=32'b0;
 			divisor=32'b0;
 			dividendo=32'b0;
@@ -60,10 +65,15 @@ module mult (
             end
             else begin
                 if(fim==0)begin
-                    dividendo = value_A;
-                    divisor  = value_B;
-                    digitoAtual = 5'b11111;//31
-                    divRun = 1;
+                    if(value_B==32'b0 )begin
+			            erroDivZero = 1;
+		            end
+		            else begin
+                        dividendo = value_A;
+                        divisor  = value_B;
+                        digitoAtual = 5'b11111;//31
+                        divRun = 1;
+                    end
                 end
                 else begin
                     fim = 0;
