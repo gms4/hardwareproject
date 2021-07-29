@@ -1,4 +1,4 @@
-module sign_extend16_32(
+module sign_extend (
 
     input  wire [15:0] data_in,
     output wire [31:0] data_out
