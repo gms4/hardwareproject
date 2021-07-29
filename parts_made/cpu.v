@@ -333,7 +333,7 @@ module cpu (
         MultInit,
         MultStop,
         Mult_High_Out,
-        Mult_Low_Out       
+        Mult_Low_Out        
     );
         
 
