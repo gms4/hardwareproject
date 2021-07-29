@@ -344,8 +344,15 @@ module cpu (
         
 
     div div_(
-
-
+    value_A,
+        value_B,
+        clk,
+        divInit,
+        divStop,
+        reset,
+        divZero,
+        hi,
+        lo
 
     );
 
@@ -526,7 +533,7 @@ module cpu (
         IsBLE,
         IsBGT,
 
-        ALU, //wilson vai fazer
+        ULA, //wilson vai fazer
         Shift,
         Reset_Out,
         
