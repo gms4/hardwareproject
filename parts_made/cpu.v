@@ -33,10 +33,16 @@ module cpu (
     wire            B_Load;
     wire            ALUOut_Load;
 
+    //Control Useless
+    wire            NEGATIVE;
+    wire            EQUAL;
+    wire            LESS;
+
+
     //Control Wires  (Outros)
     wire            Store_Size_selector;
     wire [1:0]      Load_Size_selector;
-    wire [2:0]      ULA_selector;
+    wire [2:0]      ALU_selector;
     wire [2:0]      Shift_selector;
     wire            Memory_WR;
     wire            Reg_WR;
@@ -49,6 +55,8 @@ module cpu (
     wire            LT;
     wire            ZERO;
     wire            Reset_out;
+    wire            OVERFLOW;
+
 
     //Control Wires (Mult)
     wire            MultInit;
@@ -56,7 +64,6 @@ module cpu (
 
     //Data Wires (Registradores)
     wire [31:0]     PC_Out; 
-    wire [31:0]     PC_Out;
     wire [31:0]     Adress_RG_Out;
     wire [31:0]     EPC_Out;
     wire [31:0]     MDR_Out;
@@ -82,7 +89,6 @@ module cpu (
     wire [4:0]      Mux_N_Out;
     wire [31:0]     Mux_ALU1_Out; 
     wire [31:0]     Mux_ALU2_Out;  
-    wire [31:0]     Mux_PC_Out;
 
     //Data Wires (Outros)
     wire [31:0]     Store_Size_Out;
@@ -429,6 +435,21 @@ module cpu (
 
     );
 
+    ula32 ALU_(
+
+        A_Out,
+        B_Out,
+        ALU_selector,
+        ALU_Result,
+        OVERFLOW,
+        NEGATIVE,
+        ZERO,
+        EQUAL,
+        GT,
+        LESS
+
+    );
+
     sign_extend1_32 sign_extend1_32_(
 
         LT,
@@ -457,8 +478,59 @@ module cpu (
 
     );
 
+    Unid_Control unid_control_(
 
+        clk,
+        reset,
+        OPCODE,
+        IMMEDIATE,
+        OVERFLOW,
+        Zero_Div, //wilson vai fazer
+        MultStop,
 
+        Mux_WD_Memory_selector,
+        Mux_High_selector,
+        Mux_Low_selector,
+        Mux_Extend_selector,
+        Mux_B_selector,
+        Mux_Entrada_selector,
+        Mux_N_selector,
 
+        Mux_A_selector,              
+        Mux_ALU1_selector,            
+        Mux_ALU2_selector,            
+        Mux_PC_selector,              
+        Mux_WR_Registers_selector,    
+
+        Mux_Address_selector,         
+        Mux_WD_Registers_selector,    
+
+        Adress_RG_Load,
+        EPC_Load,
+        MDR_Load,
+        IR_Load,
+        High_Load,
+        Low_Load,
+        A_Load,
+        B_Load,
+        ALUOut_Load,
+
+        Store_Size_selector,
+        Load_Size_selector,
+        Memory_WR,
+        Reg_WR,
+
+        PCWrite,
+        IsBEQ,              
+        IsBNE,
+        IsBLE,
+        IsBGT,
+
+        ULA, //wilson vai fazer
+        Shift,
+        Reset_Out,
+        
+        MultInit
+    );
 
 endmodule

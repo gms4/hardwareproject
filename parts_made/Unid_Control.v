@@ -4,10 +4,11 @@ module Unid_Control (
 input wire          clk,
 input wire          Reset_In,
 input wire [5:0]    Opcode,
-input wire [5:0]    Funct,
+input wire [15:0]   IMMEDIATE,
 input wire          Overflow,
 input wire          Zero_Div,
 input wire          MultStop,
+
 //OUTPUT PORTS
 //Muxs (até 2 entradas)
 output reg          Mux_WD_Memory,
@@ -59,13 +60,15 @@ output reg [2:0]    Shift,
 output reg          Reset_Out,
 
 //Mult Coltroller
-output reg          MultStop
+output reg          MultInit
 );
 
 //VARIABLES
 
 reg [5:0] states; //(6 bits para representar o estado atual)
 reg [4:0] counter; //(5 bit para representar o clk atual em um dado estado)
+reg [5:0] Funct;
+assign Funct = IMMEDIATE[5:0];
 
 //STATE PARAMETERS
 
