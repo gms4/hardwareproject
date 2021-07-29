@@ -61,4 +61,11 @@ module mult (
 						c <= 6'b0;
 						runMult=1'b1;
 					end
+					else begin
+						fim=0;
+					end
+				end
+			end
+		end
+	end
 endmodule
