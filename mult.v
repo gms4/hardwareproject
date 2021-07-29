@@ -1,12 +1,13 @@
-module mult (
-    input wire [31:0] value_A_Mc,
-    input wire [31:0] value_B_Mp,
-    input wire reset,
+module mult(
+    input wire [31:0] entradaA,
+    input wire [31:0] entradaB,
     input wire clk,
+    input wire reset,
     input wire multInit,
 
-    output [31:0] hi,
-    output [31:0] low
+    output wire multStop,
+    output reg [31:0] hi,
+    output reg [31:0] lo
 );
     reg [64:0] AeQeQ_1,m,complemento_2;
 	reg [5:0] c;
