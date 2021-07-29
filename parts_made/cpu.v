@@ -50,6 +50,10 @@ module cpu (
     wire            ZERO;
     wire            Reset_out;
 
+    //Control Wires (Mult)
+    wire            MultInit;
+    wire            MultStop;
+
     //Data Wires (Registradores)
     wire [31:0]     PC_Out; 
     wire [31:0]     PC_Out;
@@ -321,11 +325,17 @@ module cpu (
 
     );
 
-    mult mult_(
-
-        
-
+    mult mult_(   
+        A_Out,
+        B_Out,
+        clk,
+        Reset_Out,
+        MultInit,
+        MultStop,
+        Mult_High_Out,
+        Mult_Low_Out       
     );
+        
 
     div div_(
 
@@ -446,6 +456,7 @@ module cpu (
         Mux_PC_Out
 
     );
+
 
 
 
