@@ -51,4 +51,14 @@ module mult (
 						stop = 1;
 					end
 				end
+				else begin
+					if(fim==0)begin
+						AeQeQ_1=AeQeQ_1+ m;
+						AeQeQ_1<={32'b0,entradaB,1'b0};
+						m = {entradaA[31:0], 33'b0};
+						complemento_2_65_bits = ~entradaA + 32'b00000000000000000000000000000001;																			
+						complemento_2 = {complemento_2_65_bits, 33'b0};
+						c <= 6'b0;
+						runMult=1'b1;
+					end
 endmodule
