@@ -344,7 +344,7 @@ module cpu (
         
 
     div div_(
-    value_A,
+        value_A,
         value_B,
         clk,
         divInit,

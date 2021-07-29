@@ -8,7 +8,7 @@ input wire [15:0]   IMMEDIATE,
 input wire          Overflow,
 input wire          Zero_Div,
 input wire          MultStop,
-
+input wire          DivStop,
 //OUTPUT PORTS
 //Muxs (até 2 entradas)
 output reg          Mux_WD_Memory,
@@ -59,8 +59,10 @@ output reg [2:0]    ULA,
 output reg [2:0]    Shift,
 output reg          Reset_Out,
 
-//Mult Coltroller
-output reg          MultInit
+//Mult Controller
+output reg          MultInit,
+//Div Controller
+input wire          DivInit
 );
 
 //VARIABLES
@@ -826,7 +828,39 @@ always @(posedge clk) begin
             end
 
             //DIV
-            State_Div: begin
+            State_Div: beginMux_ALU1            =   2'b00;
+                Mux_ALU2            =   2'b00;
+                ULA                 =   3'b000;
+                Mux_PC              =   2'b00;
+                Adress_RG_Load      =   1'b0;
+                EPC_Load            =   1'b0;
+                MDR_Load            =   1'b0;
+                IR_Load             =   1'b0;
+                High_Load           =   1'b0;
+                Low_Load            =   1'b0;
+                A_Load              =   1'b0;
+                B_Load              =   1'b0;
+                ALUOut_Load         =   1'b0; 
+                Memory_WR           =   1'b0;
+                Reg_WR              =   1'b0;
+                PCWrite             =   1'b1;
+                IsBEQ               =   1'b0;
+                IsBNE               =   1'b0;
+                IsBLE               =   1'b0;
+                IsBGT               =   1'b0;
+                Reset_Out           =   1'b0;
+                MultInit            =   1'b0;
+                divInit             =   1'b1;
+                
+                if (!divStop)begin
+                    states = State_Div;
+                end
+                else begin
+                    High_Load           =   1'b1;
+                    Low_Load            =   1'b1;
+                    divInit            =   1'b0;
+                    states              =   State_Fetch;
+                end
             end
 
             //MULT
