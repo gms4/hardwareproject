@@ -8,14 +8,12 @@ module mult (
     output [31:0] hi,
     output [31:0] low
 );
-    reg [31:0] m, q, r; 
-    reg [5:0] c;
-    reg test;
-    reg multRun,fim;
-
-    reg [31:0] sum, diff;
-    
-    assign hi = {r, q};
+    reg [64:0] AeQeQ_1,m,complemento_2;
+	reg [5:0] c;
+	reg [31:0]complemento_2_65_bits;
+	reg stop,runMult,fim;
+	
+    assign multStop = stop;
     
     always @(posedge clk) begin
       if(reset)begin
