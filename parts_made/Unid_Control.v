@@ -59,7 +59,6 @@ output reg          IsBGT,
 //Special Controllers
 output reg [2:0]    ULA,
 output reg [2:0]    Shift,
-output reg          Reset_Out,
 
 //Mult Controller
 output reg          MultInit,
@@ -160,17 +159,16 @@ parameter Funct_RTE         =       6'b010011;
 parameter Funct_Addm        =       6'b000101;
 
 initial begin
-    Mux_WR_Registers    =   2'b01;
-    Mux_WD_Registers    =   3'b000;
-    Reg_WR              =   1'b1;
-    Reset_Out           =   1'b1;
-    states              =   State_Fetch;
-    counter             =   5'b00000;
+    //Mux_WR_Registers    =   2'b01;
+    //Mux_WD_Registers    =   3'b000;
+    //Reg_WR              =   1'b1;
+    states                =   State_Reset;
+    //counter             =   5'b00000;
 end
 
 always @(posedge clk) begin
     //RESET
-    if ((Reset_In == 1'b1) && (states != State_Overflow) && (states != State_Div0) && states != (State_Opcode404)) begin
+    if ((Reset_In == 1'b1)) begin
         Mux_WR_Registers    =   2'b01;       ////
         Mux_WD_Registers    =   3'b000;      ////
         Adress_RG_Load      =   1'b0;
@@ -189,7 +187,6 @@ always @(posedge clk) begin
         IsBNE               =   1'b0;
         IsBLE               =   1'b0;
         IsBGT               =   1'b0;
-        Reset_Out           =   1'b1;        ////
 
         //next state
         states = State_Fetch;
@@ -219,7 +216,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -244,7 +241,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -277,7 +274,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -303,7 +300,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -514,7 +511,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -538,7 +535,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -567,7 +564,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -597,7 +594,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -621,7 +618,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -650,7 +647,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -680,7 +677,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -704,7 +701,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -733,7 +730,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -765,7 +762,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -795,7 +792,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -827,7 +824,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -853,7 +850,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -885,7 +882,7 @@ always @(posedge clk) begin
                 IsBNE               =   1'b0;
                 IsBLE               =   1'b0;
                 IsBGT               =   1'b0;
-                Reset_Out           =   1'b0;
+                
                 MultInit            =   1'b0;
                 DivInit             =   1'b1;
                 
@@ -922,7 +919,7 @@ always @(posedge clk) begin
                 IsBNE               =   1'b0;
                 IsBLE               =   1'b0;
                 IsBGT               =   1'b0;
-                Reset_Out           =   1'b0;
+                
                 MultInit            =   1'b1;
                 DivInit             =   1'b0;
 
@@ -962,7 +959,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -993,7 +990,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1024,7 +1021,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1056,7 +1053,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1082,7 +1079,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1114,7 +1111,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1140,7 +1137,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1172,7 +1169,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1198,7 +1195,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1230,7 +1227,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1256,7 +1253,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1288,7 +1285,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1314,7 +1311,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1346,7 +1343,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1372,7 +1369,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1404,7 +1401,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1434,7 +1431,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1467,7 +1464,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1497,7 +1494,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1529,7 +1526,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1554,7 +1551,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1579,7 +1576,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1606,7 +1603,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1631,7 +1628,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1656,7 +1653,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1683,7 +1680,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1713,7 +1710,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
                     
@@ -1746,7 +1743,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1776,7 +1773,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
                     //next state
@@ -1808,7 +1805,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1834,7 +1831,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1867,7 +1864,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1900,7 +1897,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b1; ////
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1933,7 +1930,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b1; ////
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1966,7 +1963,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b1; ////
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1999,7 +1996,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2028,7 +2025,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2054,7 +2051,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2081,7 +2078,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2107,7 +2104,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2140,7 +2137,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2169,7 +2166,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2193,7 +2190,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2220,7 +2217,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2253,7 +2250,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2282,7 +2279,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2306,7 +2303,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2333,7 +2330,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2366,7 +2363,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2392,7 +2389,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2425,7 +2422,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2454,7 +2451,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2478,7 +2475,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2505,7 +2502,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2538,7 +2535,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2567,7 +2564,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2591,7 +2588,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2618,7 +2615,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2651,7 +2648,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2680,7 +2677,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2704,7 +2701,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2731,7 +2728,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2764,7 +2761,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2790,7 +2787,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2823,7 +2820,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2853,7 +2850,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2883,7 +2880,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2915,7 +2912,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2942,7 +2939,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    Reset_Out           =   1'b0;
+                    
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 

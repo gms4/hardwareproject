@@ -54,7 +54,6 @@ module cpu (
     wire            GT;
     wire            LT;
     wire            ZERO;
-    wire            Reset_Out;
     wire            OVERFLOW;
 
 
@@ -122,7 +121,7 @@ module cpu (
 
     Registrador PC_(
         clk,
-        Reset_Out,
+        reset,
         PC_Load,
         Mux_PC_Out,
         PC_Out
@@ -151,7 +150,7 @@ module cpu (
 
     Registrador address_RG_(
         clk,
-        Reset_Out,
+        reset,
         Adress_RG_Load,
         PC_Out,
         Mux_Address_Out
@@ -167,7 +166,7 @@ module cpu (
 
     Registrador mdr_(
         clk,
-        Reset_Out,
+        reset,
         MDR_Load,
         Memory_Out,
         MDR_Out
@@ -175,7 +174,7 @@ module cpu (
 
     Registrador EPC_(
         clk,
-        Reset_Out,
+        reset,
         EPC_Load,
         Adress_RG_Out,
         EPC_Out
@@ -183,7 +182,7 @@ module cpu (
 
     Instr_Reg IR_(
         clk,
-        Reset_Out,
+        reset,
         IR_Load,
         Memory_Out,
         OPCODE,
@@ -235,7 +234,7 @@ module cpu (
     Registrador high_(
 
         clk,
-        Reset_Out,
+        reset,
         High_Load,
         Mux_High_Out,
         High_Out
@@ -245,7 +244,7 @@ module cpu (
     Registrador low_(
 
         clk,
-        Reset_Out,
+        reset,
         Low_Load,
         Mux_Low_Out,
         Low_Out
@@ -255,7 +254,7 @@ module cpu (
     Banco_reg registers_(
 
         clk,
-        Reset_Out,
+        reset,
         Reg_WR,
         RT,
         RS,
@@ -328,7 +327,7 @@ module cpu (
     RegDesloc reg_desloc_(
   
         clk,
-        Reset_Out,
+        reset,
         Shift_selector,
         Mux_N_Out,
         Mux_Entrada_Out,
@@ -340,7 +339,7 @@ module cpu (
         A_Out,
         B_Out,
         clk,
-        Reset_Out,
+        reset,
         MultInit,
         MultStop,
         Mult_High_Out,
@@ -371,7 +370,7 @@ module cpu (
     Registrador A_(
 
         clk,
-        Reset_Out,
+        reset,
         A_Load,
         Mux_A_Out,
         A_Out
@@ -381,7 +380,7 @@ module cpu (
      Registrador B_(
 
         clk,
-        Reset_Out,
+        reset,
         B_Load,
         Mux_B_Out,
         B_Out
@@ -472,7 +471,7 @@ module cpu (
     Registrador ALUOut_(
 
         clk,
-        Reset_Out,
+        reset,
         ALUOut_Load,
         ALU_Result,
         ALUOut_Out
@@ -540,7 +539,6 @@ module cpu (
 
         ULA, //wilson vai fazer
         Shift,
-        Reset_Out,
         
         MultInit
     );
