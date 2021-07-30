@@ -104,7 +104,7 @@ module cpu (
     wire [15:0]     Load_Size_OutDown;
     wire [31:0]     Load_Size_OutUp;
     wire [31:0]     The_Box_Out;
-    wire [31:0]     The_Box2_Out;
+    wire [25:0]     The_Box2_Out;
     wire [31:0]     RegDesloc_Out;
     wire [31:0]     Sign_Extend1_32_Out;
     wire [31:0]     Read_Data1_Out;
@@ -115,7 +115,7 @@ module cpu (
     wire [31:0]     Div_Low_Out;
     wire [31:0]     Sign_Extend16_32_Out;
     wire [31:0]     Shift_Left32_32_Out;
-    wire [31:0]     Shift_Left26_28_Out;
+    wire [27:0]     Shift_Left26_28_Out;
     wire [31:0]     ALU_Result;
 
 
@@ -414,7 +414,7 @@ module cpu (
 
     shift_left26_28 shift_left26_28_(
 
-        The_Box_Out,
+        The_Box2_Out,
         Shift_Left26_28_Out
 
     );
@@ -498,6 +498,7 @@ module cpu (
         OVERFLOW,
         Zero_Div, //wilson vai fazer
         MultStop,
+        DivStop,
 
         Mux_WD_Memory_selector,
         Mux_High_selector,
@@ -537,10 +538,12 @@ module cpu (
         IsBLE,
         IsBGT,
 
-        ULA, //wilson vai fazer
-        Shift,
+        ALU_selector,
+        Shift_selector,
         
-        MultInit
+        MultInit,
+
+        DivInit
     );
 
 endmodule

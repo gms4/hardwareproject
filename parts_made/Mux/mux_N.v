@@ -3,7 +3,7 @@ module mux_N(
     input  wire        selector,
     input  wire [31:0] data_0,
     input  wire [15:0] data_1,
-    output wire [31:0] data_out
+    output wire [4:0] data_out
 
 );
 
