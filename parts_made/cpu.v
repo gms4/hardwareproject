@@ -356,8 +356,8 @@ module cpu (
         DivStop,
         reset,
         DivZero,
-        Mult_High_Out,
-        Mult_Low_Out
+        Div_High_Out,
+        Div_Low_Out
 
     );
 
