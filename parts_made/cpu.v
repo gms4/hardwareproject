@@ -496,7 +496,7 @@ module cpu (
         OPCODE,
         IMMEDIATE,
         OVERFLOW,
-        Zero_Div, //wilson vai fazer
+        Zero_Div,
         MultStop,
         DivStop,
 

@@ -15,6 +15,30 @@ data_0 ---|
 31 -------|         |--data_out-->
 data_3 ---|--out2--/
 
+//00
+
+out1 = data_0
+out2 = 31
+data_out = data_0
+
+//01
+
+out1 = 29
+out2 = data_3
+data_out = 29
+
+//10
+
+out1 = data_0
+out2 = 31
+data_out = out2 = 31
+
+/11
+
+out1 = 29
+out2 = data_3
+data_out = data_3
+
 */
 
 wire [31:0] out1, out2;
