@@ -17,6 +17,10 @@ module mux_ALU1(
 
 wire [31:0] out1;
 
+//00 data_0 ok
+//01 data_1 ok
+//10 32'd0 ok
+
 assign out1 = (selector[0]) ? data_1 : data_0;
 assign data_out = (selector[1]) ? 32'd0 : out1;
 
