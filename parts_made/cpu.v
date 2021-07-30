@@ -448,8 +448,8 @@ module cpu (
 
     ula32 ALU_(
 
-        A_Out,
-        B_Out,
+        Mux_ALU1_Out,
+        Mux_ALU2_Out,
         ALU_selector,
         ALU_Result,
         OVERFLOW,
