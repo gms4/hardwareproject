@@ -62,6 +62,11 @@ module cpu (
     wire            MultInit;
     wire            MultStop;
 
+    //Control Wires (Div)
+    wire            DivInit;
+    wire            DivStop;
+    wire            DivZero;
+
     //Data Wires (Registradores)
     wire [31:0]     PC_Out; 
     wire [31:0]     Adress_RG_Out;
@@ -339,20 +344,20 @@ module cpu (
         MultInit,
         MultStop,
         Mult_High_Out,
-        Mult_Low_Out        
+        Mult_Low_Out
     );
         
 
     div div_(
-        value_A,
-        value_B,
+        A_Out,
+        B_Out,
         clk,
-        divInit,
-        divStop,
+        DivInit,
+        DivStop,
         reset,
-        divZero,
-        hi,
-        lo
+        DivZero,
+        Mult_High_Out,
+        Mult_Low_Out
 
     );
 
