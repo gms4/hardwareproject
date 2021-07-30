@@ -54,7 +54,7 @@ module cpu (
     wire            GT;
     wire            LT;
     wire            ZERO;
-    wire            Reset_out;
+    wire            Reset_Out;
     wire            OVERFLOW;
 
 
@@ -122,7 +122,7 @@ module cpu (
 
     Registrador PC_(
         clk,
-        Reset_out,
+        Reset_Out,
         PC_Load,
         Mux_PC_Out,
         PC_Out
@@ -151,7 +151,7 @@ module cpu (
 
     Registrador address_RG_(
         clk,
-        Reset_out,
+        Reset_Out,
         Adress_RG_Load,
         PC_Out,
         Mux_Address_Out
@@ -167,7 +167,7 @@ module cpu (
 
     Registrador mdr_(
         clk,
-        Reset_out,
+        Reset_Out,
         MDR_Load,
         Memory_Out,
         MDR_Out
@@ -175,15 +175,15 @@ module cpu (
 
     Registrador EPC_(
         clk,
-        Reset_out,
+        Reset_Out,
         EPC_Load,
         Adress_RG_Out,
-        EPC_out
+        EPC_Out
     );
 
     Instr_Reg IR_(
         clk,
-        Reset_out,
+        Reset_Out,
         IR_Load,
         Memory_Out,
         OPCODE,
@@ -235,7 +235,7 @@ module cpu (
     Registrador high_(
 
         clk,
-        Reset_out,
+        Reset_Out,
         High_Load,
         Mux_High_Out,
         High_Out
