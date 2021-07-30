@@ -27,7 +27,6 @@ output reg [1:0]    Mux_ALU1,            //3 entradas
 output reg [1:0]    Mux_ALU2,            //4 entradas
 output reg [1:0]    Mux_PC,              //4 entradas
 output reg [1:0]    Mux_WR_Registers,    //4 entradas
-output reg [1:0]    beginMux_ALU1,
 
 //Muxs (até 8 entradas)
 output reg [2:0]    Mux_Address,         //5 entradas
@@ -866,7 +865,7 @@ always @(posedge clk) begin
 
             //DIV
             State_Div: begin
-                beginMux_ALU1       =   2'b00;
+                Mux_ALU1            =   2'b00;
                 Mux_ALU2            =   2'b00;
                 ULA                 =   3'b000;
                 Mux_PC              =   2'b00;

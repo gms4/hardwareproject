@@ -1,4 +1,4 @@
-module mult (
+module div (
     input wire [31:0] value_A,
     input wire [31:0] value_B,
     input wire clk,
