@@ -218,6 +218,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -241,6 +243,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Decode;
@@ -272,6 +276,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Decode;
@@ -296,6 +302,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     counter = 5'b00000;
@@ -505,6 +513,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Overflow;
@@ -527,6 +537,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Overflow;
@@ -554,6 +566,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -582,6 +596,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Opcode404;
@@ -604,6 +620,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Opcode404;
@@ -631,6 +649,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -659,6 +679,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Div0;
@@ -681,6 +703,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Div0;
@@ -708,6 +732,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -738,6 +764,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Add;
@@ -766,6 +794,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -796,6 +826,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_And;
@@ -820,6 +852,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -850,15 +884,15 @@ always @(posedge clk) begin
                 IsBGT               =   1'b0;
                 Reset_Out           =   1'b0;
                 MultInit            =   1'b0;
-                divInit             =   1'b1;
+                DivInit             =   1'b1;
                 
-                if (!divStop)begin
+                if (!DivStop)begin
                     states = State_Div;
                 end
                 else begin
                     High_Load           =   1'b1;
                     Low_Load            =   1'b1;
-                    divInit            =   1'b0;
+                    DivInit            =   1'b0;
                     states              =   State_Fetch;
                 end
             end
@@ -887,6 +921,7 @@ always @(posedge clk) begin
                 IsBGT               =   1'b0;
                 Reset_Out           =   1'b0;
                 MultInit            =   1'b1;
+                DivInit             =   1'b0;
 
                 states = State_Mult;
 
@@ -925,6 +960,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -954,6 +991,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -983,6 +1022,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -1013,6 +1054,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Sll;
@@ -1037,6 +1080,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -1067,6 +1112,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Sllv;
@@ -1091,6 +1138,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -1121,6 +1170,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Slt;
@@ -1145,6 +1196,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -1175,6 +1228,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Sra;
@@ -1199,6 +1254,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -1229,6 +1286,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Srav;
@@ -1253,6 +1312,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -1283,6 +1344,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Srl;
@@ -1307,6 +1370,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -1337,6 +1402,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Sub;
@@ -1365,6 +1432,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -1396,6 +1465,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -1424,6 +1495,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -1454,6 +1527,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Addm;
@@ -1477,6 +1552,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Addm;
@@ -1500,6 +1577,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Addm;
@@ -1525,6 +1604,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Addm;
@@ -1548,6 +1629,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Addm;
@@ -1571,6 +1654,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Addm;
@@ -1596,6 +1681,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Addm;
@@ -1624,6 +1711,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
                     
                     //next state
                     states = State_Fetch;
@@ -1655,6 +1744,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Addi;
@@ -1683,6 +1774,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
                     //next state
                     states = State_Fetch;
                     counter = 5'b00000;
@@ -1713,6 +1806,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Addiu;
@@ -1737,6 +1832,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -1768,6 +1865,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -1799,6 +1898,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -1830,6 +1931,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b1; ////
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -1861,6 +1964,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b1; ////
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -1892,6 +1997,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Sllm;
@@ -1919,6 +2026,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Sllm;
@@ -1943,6 +2052,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Sllm;
@@ -1968,6 +2079,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Sllm;
@@ -1992,6 +2105,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -2023,6 +2138,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Lb;
@@ -2050,6 +2167,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Lb;
@@ -2072,6 +2191,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Lb;
@@ -2097,6 +2218,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -2128,6 +2251,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Lh;
@@ -2155,6 +2280,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Lh;
@@ -2177,6 +2304,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Lh;
@@ -2202,6 +2331,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -2233,6 +2364,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Lui;
@@ -2257,6 +2390,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -2288,6 +2423,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Lw;
@@ -2315,6 +2452,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Lw;
@@ -2337,6 +2476,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Lw;
@@ -2362,6 +2503,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -2393,6 +2536,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Sb;
@@ -2420,6 +2565,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Sb;
@@ -2442,6 +2589,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Sb;
@@ -2467,6 +2616,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -2498,6 +2649,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Sh;
@@ -2525,6 +2678,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Sh;
@@ -2547,6 +2702,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Sh;
@@ -2572,6 +2729,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -2603,6 +2762,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Slti;
@@ -2627,6 +2788,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -2658,6 +2821,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Sw;
@@ -2686,6 +2851,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -2714,6 +2881,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
@@ -2744,6 +2913,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Jal;
@@ -2769,6 +2940,8 @@ always @(posedge clk) begin
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
                     Reset_Out           =   1'b0;
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
 
                     //next state
                     states = State_Fetch;
