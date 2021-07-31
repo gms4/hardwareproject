@@ -65,7 +65,7 @@ module cpu (
     wire            DivInit;
     wire            DivStop;
     wire            DivZero;
-    
+
     //Data Wires (Registradores)
     wire [31:0]     PC_Out; 
     wire [31:0]     Adress_RG_Out;
@@ -153,7 +153,7 @@ module cpu (
         reset,
         Adress_RG_Load,
         PC_Out,
-        Mux_Address_Out
+        Adress_RG_Out
     );
 
     Memoria MEM_(

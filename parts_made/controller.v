@@ -29,6 +29,6 @@ isBGT ----&---out4-----||/
 
 */
 
-    assign data_out = (zero && isBEQ) || (!zero && isBNE) || !gt && isBLE || (gt && isBGT) || (pc_write);
+    assign data_out = (zero && isBEQ) || (!zero && isBNE) || (!gt && isBLE) || (gt && isBGT) || (pc_write);
 
 endmodule
