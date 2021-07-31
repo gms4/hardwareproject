@@ -1094,6 +1094,31 @@ always @(posedge clk) begin
                     DivInit             =   1'b0;
 
                     //next state
+                    states = State_Sll;
+                    counter = counter + 5'b00001;
+                end else if (counter == 5'b00010) begin
+                    Shift               =   3'b000; ////
+                    Adress_RG_Load      =   1'b0;
+                    EPC_Load            =   1'b0;
+                    MDR_Load            =   1'b0;
+                    IR_Load             =   1'b0;
+                    High_Load           =   1'b0;
+                    Low_Load            =   1'b0;
+                    A_Load              =   1'b0;
+                    B_Load              =   1'b0;
+                    ALUOut_Load         =   1'b0;
+                    Memory_WR           =   1'b0;
+                    Reg_WR              =   1'b0;
+                    PCWrite             =   1'b0;
+                    IsBEQ               =   1'b0;
+                    IsBNE               =   1'b0;
+                    IsBLE               =   1'b0;
+                    IsBGT               =   1'b0;
+                    
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
+
+                    //next state
                     states = State_Fetch;
                     counter = 5'b00000;
                 end
@@ -1104,7 +1129,7 @@ always @(posedge clk) begin
                 if (counter == 5'b00000) begin
                     Mux_Entrada         =   1'b0; ////
                     Mux_N               =   1'b0; ////
-                    Shift               =   3'b010; ////
+                    Shift               =   3'b001; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
                     MDR_Load            =   1'b0;
@@ -1131,6 +1156,7 @@ always @(posedge clk) begin
                 end else if (counter == 5'b00001) begin
                     Mux_WR_Registers    =   2'b11; ////
                     Mux_WD_Registers    =   3'b101; ////
+                    Shift               =   3'b010; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
                     MDR_Load            =   1'b0;
@@ -1142,6 +1168,31 @@ always @(posedge clk) begin
                     ALUOut_Load         =   1'b0;
                     Memory_WR           =   1'b0;
                     Reg_WR              =   1'b1; ////
+                    PCWrite             =   1'b0;
+                    IsBEQ               =   1'b0;
+                    IsBNE               =   1'b0;
+                    IsBLE               =   1'b0;
+                    IsBGT               =   1'b0;
+                    
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
+
+                    //next state
+                    states = State_Sllv;
+                    counter = counter + 5'b00001;
+                end else if (counter == 5'b00010) begin
+                    Shift               =   3'b000; ////
+                    Adress_RG_Load      =   1'b0;
+                    EPC_Load            =   1'b0;
+                    MDR_Load            =   1'b0;
+                    IR_Load             =   1'b0;
+                    High_Load           =   1'b0;
+                    Low_Load            =   1'b0;
+                    A_Load              =   1'b0;
+                    B_Load              =   1'b0;
+                    ALUOut_Load         =   1'b0;
+                    Memory_WR           =   1'b0;
+                    Reg_WR              =   1'b0; 
                     PCWrite             =   1'b0;
                     IsBEQ               =   1'b0;
                     IsBNE               =   1'b0;
@@ -1220,7 +1271,7 @@ always @(posedge clk) begin
                 if (counter == 5'b00000) begin
                     Mux_Entrada         =   1'b1; ////
                     Mux_N               =   1'b1; ////
-                    Shift               =   3'b100; ////
+                    Shift               =   3'b001; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
                     MDR_Load            =   1'b0;
@@ -1244,9 +1295,10 @@ always @(posedge clk) begin
                     //next state
                     states = State_Sra;
                     counter = counter + 5'b00001;
-                end else if (counter == 5'b00001) begin
+                end if (counter == 5'b00001) begin
                     Mux_WR_Registers    =   2'b11; ////
-                    Mux_WD_Registers    =   3'b101; ////
+                    Mux_WD_Registers    =   3'b110; ////
+                    Shift               =   3'b100; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
                     MDR_Load            =   1'b0;
@@ -1257,7 +1309,32 @@ always @(posedge clk) begin
                     B_Load              =   1'b0;
                     ALUOut_Load         =   1'b0;
                     Memory_WR           =   1'b0;
-                    Reg_WR              =   1'b1; ////
+                    Reg_WR              =   1'b1;
+                    PCWrite             =   1'b0;
+                    IsBEQ               =   1'b0;
+                    IsBNE               =   1'b0;
+                    IsBLE               =   1'b0;
+                    IsBGT               =   1'b0;
+                    
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
+
+                    //next state
+                    states = State_Sra;
+                    counter = counter + 5'b00001;
+                end else if (counter == 5'b00010) begin
+                    Shift               =   3'b000; ////
+                    Adress_RG_Load      =   1'b0;
+                    EPC_Load            =   1'b0;
+                    MDR_Load            =   1'b0;
+                    IR_Load             =   1'b0;
+                    High_Load           =   1'b0;
+                    Low_Load            =   1'b0;
+                    A_Load              =   1'b0;
+                    B_Load              =   1'b0;
+                    ALUOut_Load         =   1'b0;
+                    Memory_WR           =   1'b0;
+                    Reg_WR              =   1'b0; ////
                     PCWrite             =   1'b0;
                     IsBEQ               =   1'b0;
                     IsBNE               =   1'b0;
@@ -1275,10 +1352,10 @@ always @(posedge clk) begin
             
             //SRAV
             State_Srav: begin
-                if (counter == 5'b00000) begin
+                if (counter == 5'b00000) begin//AQUI
                     Mux_Entrada         =   1'b0; ////
                     Mux_N               =   1'b0; ////
-                    Shift               =   3'b100; ////
+                    Shift               =   3'b001; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
                     MDR_Load            =   1'b0;
@@ -1302,9 +1379,10 @@ always @(posedge clk) begin
                     //next state
                     states = State_Srav;
                     counter = counter + 5'b00001;
-                end else if (counter == 5'b00001) begin
+                end if (counter == 5'b00001) begin
                     Mux_WR_Registers    =   2'b11; ////
                     Mux_WD_Registers    =   3'b101; ////
+                    Shift               =   3'b100; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
                     MDR_Load            =   1'b0;
@@ -1315,7 +1393,32 @@ always @(posedge clk) begin
                     B_Load              =   1'b0;
                     ALUOut_Load         =   1'b0;
                     Memory_WR           =   1'b0;
-                    Reg_WR              =   1'b1; ////
+                    Reg_WR              =   1'b1;//
+                    PCWrite             =   1'b0;
+                    IsBEQ               =   1'b0;
+                    IsBNE               =   1'b0;
+                    IsBLE               =   1'b0;
+                    IsBGT               =   1'b0;
+                    
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
+
+                    //next state
+                    states = State_Srav;
+                    counter = counter + 5'b00001;
+                end else if (counter == 5'b00010) begin
+                    Shift               =   3'b000; ////
+                    Adress_RG_Load      =   1'b0;
+                    EPC_Load            =   1'b0;
+                    MDR_Load            =   1'b0;
+                    IR_Load             =   1'b0;
+                    High_Load           =   1'b0;
+                    Low_Load            =   1'b0;
+                    A_Load              =   1'b0;
+                    B_Load              =   1'b0;
+                    ALUOut_Load         =   1'b0;
+                    Memory_WR           =   1'b0;
+                    Reg_WR              =   1'b0; ////
                     PCWrite             =   1'b0;
                     IsBEQ               =   1'b0;
                     IsBNE               =   1'b0;
@@ -1336,7 +1439,7 @@ always @(posedge clk) begin
                 if (counter == 5'b00000) begin
                     Mux_Entrada         =   1'b1; ////
                     Mux_N               =   1'b1; ////
-                    Shift               =   3'b011; ////
+                    Shift               =   3'b001; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
                     MDR_Load            =   1'b0;
@@ -1360,9 +1463,10 @@ always @(posedge clk) begin
                     //next state
                     states = State_Srl;
                     counter = counter + 5'b00001;
-                end else if (counter == 5'b00001) begin
+                end else if (counter == 5'b00010) begin
                     Mux_WR_Registers    =   2'b11; ////
                     Mux_WD_Registers    =   3'b101; ////
+                    Shift               =   3'b011; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
                     MDR_Load            =   1'b0;
@@ -1379,7 +1483,32 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    
+
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
+
+                    //next state
+                    states = State_Srl;
+                    counter = counter + 5'b00001;
+                end else if (counter == 5'b00011) begin
+                    Shift               =   3'b000; ////
+                    Adress_RG_Load      =   1'b0;
+                    EPC_Load            =   1'b0;
+                    MDR_Load            =   1'b0;
+                    IR_Load             =   1'b0;
+                    High_Load           =   1'b0;
+                    Low_Load            =   1'b0;
+                    A_Load              =   1'b0;
+                    B_Load              =   1'b0;
+                    ALUOut_Load         =   1'b0;
+                    Memory_WR           =   1'b0;
+                    Reg_WR              =   1'b0; ////
+                    PCWrite             =   1'b0;
+                    IsBEQ               =   1'b0;
+                    IsBNE               =   1'b0;
+                    IsBLE               =   1'b0;
+                    IsBGT               =   1'b0;
+
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -2071,7 +2200,7 @@ always @(posedge clk) begin
                 end else if (counter == 5'b00101) begin
                     Mux_Entrada         =   1'b0; ////
                     Mux_N               =   1'b0; ////
-                    Shift               =   3'b010; ////
+                    Shift               =   3'b001; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
                     MDR_Load            =   1'b0;
@@ -2098,6 +2227,7 @@ always @(posedge clk) begin
                 end else if (counter == 5'b00110) begin
                     Mux_WR_Registers    =   2'b00; ////
                     Mux_WD_Registers    =   3'b101; ////
+                    Shift               =   3'b010; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
                     MDR_Load            =   1'b0;
@@ -2109,6 +2239,31 @@ always @(posedge clk) begin
                     ALUOut_Load         =   1'b0;
                     Memory_WR           =   1'b0;
                     Reg_WR              =   1'b1; ////
+                    PCWrite             =   1'b0;
+                    IsBEQ               =   1'b0;
+                    IsBNE               =   1'b0;
+                    IsBLE               =   1'b0;
+                    IsBGT               =   1'b0;
+                    
+                    MultInit            =   1'b0;
+                    DivInit             =   1'b0;
+
+                    //next state
+                    states = State_Sllm;
+                    counter = counter + 5'b00001;
+                end else if (counter == 5'b00111) begin
+                    Shift               =   3'b000; ////
+                    Adress_RG_Load      =   1'b0;
+                    EPC_Load            =   1'b0;
+                    MDR_Load            =   1'b0;
+                    IR_Load             =   1'b0;
+                    High_Load           =   1'b0;
+                    Low_Load            =   1'b0;
+                    A_Load              =   1'b0;
+                    B_Load              =   1'b0;
+                    ALUOut_Load         =   1'b0;
+                    Memory_WR           =   1'b0;
+                    Reg_WR              =   1'b0; ////
                     PCWrite             =   1'b0;
                     IsBEQ               =   1'b0;
                     IsBNE               =   1'b0;
