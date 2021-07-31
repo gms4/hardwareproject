@@ -890,6 +890,8 @@ always @(posedge clk) begin
                     states = State_Div;
                 end
                 else begin
+                    Mux_High            =   1'b1;
+                    Mux_Low             =   1'b1;
                     High_Load           =   1'b1;
                     Low_Load            =   1'b1;
                     DivInit             =   1'b0;
@@ -929,6 +931,8 @@ always @(posedge clk) begin
                     states = State_Mult;
                 end
                 else begin
+                    Mux_High            =   1'b0;
+                    Mux_Low             =   1'b0;
                     High_Load           =   1'b1;
                     Low_Load            =   1'b1;
                     MultInit            =   1'b0;
