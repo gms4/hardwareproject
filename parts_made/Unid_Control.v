@@ -9,7 +9,7 @@ input wire          Overflow,
 input wire          Zero_Div,
 input wire          MultStop,
 input wire          DivStop,
-
+input wire          DivZero,
 
 //OUTPUT PORTS
 //Muxs (até 2 entradas)
@@ -64,6 +64,7 @@ output reg [2:0]    Shift,
 output reg          MultInit,
 //Div Controller
 output reg          DivInit
+
 );
 
 //VARIABLES
@@ -885,8 +886,12 @@ always @(posedge clk) begin
                 
                 MultInit            =   1'b0;
                 DivInit             =   1'b1;
-                
-                if (!DivStop)begin
+                //inserir if divzero
+                if(!DivZero)begin
+                    DivInit             =   1'b0;
+                    states = State_Div0;
+                end
+                else if(!DivStop)begin
                     states = State_Div;
                 end
                 else begin
@@ -916,7 +921,7 @@ always @(posedge clk) begin
                 ALUOut_Load         =   1'b0; 
                 Memory_WR           =   1'b0;
                 Reg_WR              =   1'b0;
-                PCWrite             =   1'b1;
+                PCWrite             =   1'b0;
                 IsBEQ               =   1'b0;
                 IsBNE               =   1'b0;
                 IsBLE               =   1'b0;
@@ -958,7 +963,7 @@ always @(posedge clk) begin
                     ALUOut_Load         =   1'b0; 
                     Memory_WR           =   1'b0;
                     Reg_WR              =   1'b0;
-                    PCWrite             =   1'b1; ////
+                    PCWrite             =   1'b0; ////
                     IsBEQ               =   1'b0;
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
