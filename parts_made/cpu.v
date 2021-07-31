@@ -233,7 +233,7 @@ module cpu (
 
     );
 
-    shift_left_16_32 shift_left_16_32_(
+    shift_left16_32 shift_left16_32_(
 
         IMMEDIATE,
         Shift_Left_16_32_Out
