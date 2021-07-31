@@ -256,8 +256,8 @@ module cpu (
         clk,
         reset,
         Reg_WR,
-        RT,
         RS,
+        RT,
         Mux_WR_Registers_Out,
         Mux_WD_Registers_Out,
         Read_Data1_Out,
@@ -299,8 +299,8 @@ module cpu (
        PCWrite,
        IsBEQ,
        IsBNE,
-       IsBLE,
        IsBGT,
+       IsBLE,
        PC_Load
 
     );
