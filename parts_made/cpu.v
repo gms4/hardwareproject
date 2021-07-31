@@ -153,7 +153,11 @@ module cpu (
         reset,
         Address_RG_Load,
         PC_Out,
+<<<<<<< HEAD
         Address_RG_Out
+=======
+        Adress_RG_Out
+>>>>>>> 2e02aa338a0385ecf0fa468bd4bb8b127f698dac
     );
 
     Memoria MEM_(
@@ -448,8 +452,8 @@ module cpu (
 
     ula32 ALU_(
 
-        A_Out,
-        B_Out,
+        Mux_ALU1_Out,
+        Mux_ALU2_Out,
         ALU_selector,
         ALU_Result,
         OVERFLOW,
@@ -499,6 +503,7 @@ module cpu (
         Zero_Div,
         MultStop,
         DivStop,
+        DivZero,
 
         Mux_WD_Memory_selector,
         Mux_High_selector,
