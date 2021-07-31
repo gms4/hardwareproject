@@ -299,8 +299,8 @@ module cpu (
        PCWrite,
        IsBEQ,
        IsBNE,
-       IsBLE,
        IsBGT,
+       IsBLE,
        PC_Load
 
     );
