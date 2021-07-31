@@ -65,7 +65,7 @@ module cpu (
     wire            DivInit;
     wire            DivStop;
     wire            DivZero;
-
+    
     //Data Wires (Registradores)
     wire [31:0]     PC_Out; 
     wire [31:0]     Adress_RG_Out;
@@ -499,6 +499,7 @@ module cpu (
         Zero_Div,
         MultStop,
         DivStop,
+        DivZero,
 
         Mux_WD_Memory_selector,
         Mux_High_selector,
