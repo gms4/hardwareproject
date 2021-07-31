@@ -766,7 +766,7 @@ always @(posedge clk) begin
                     
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
-
+                    
                     //next state
                     states = State_Add;
                     counter = counter + 5'b00001;
@@ -1297,7 +1297,7 @@ always @(posedge clk) begin
                     counter = counter + 5'b00001;
                 end if (counter == 5'b00001) begin
                     Mux_WR_Registers    =   2'b11; ////
-                    Mux_WD_Registers    =   3'b110; ////
+                    Mux_WD_Registers    =   3'b101; ////
                     Shift               =   3'b100; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
