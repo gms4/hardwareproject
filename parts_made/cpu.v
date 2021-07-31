@@ -68,7 +68,7 @@ module cpu (
 
     //Data Wires (Registradores)
     wire [31:0]     PC_Out; 
-    wire [31:0]     Adress_RG_Out;
+    wire [31:0]     Address_RG_Out;
     wire [31:0]     EPC_Out;
     wire [31:0]     MDR_Out;
     wire [31:0]     IR_Out;
@@ -151,9 +151,9 @@ module cpu (
     Registrador address_RG_(
         clk,
         reset,
-        Adress_RG_Load,
+        Address_RG_Load,
         PC_Out,
-        Mux_Address_Out
+        Address_RG_Out
     );
 
     Memoria MEM_(
@@ -176,7 +176,7 @@ module cpu (
         clk,
         reset,
         EPC_Load,
-        Adress_RG_Out,
+        Address_RG_Out,
         EPC_Out
     );
 
