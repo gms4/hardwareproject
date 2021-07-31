@@ -1045,7 +1045,7 @@ always @(posedge clk) begin
                 if (counter == 5'b00000) begin
                     Mux_Entrada         =   1'b1; ////
                     Mux_N               =   1'b1; ////
-                    Shift               =   3'b010; ////
+                    Shift               =   3'b001; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
                     MDR_Load            =   1'b0;
@@ -1062,7 +1062,7 @@ always @(posedge clk) begin
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
                     IsBGT               =   1'b0;
-                    
+
                     MultInit            =   1'b0;
                     DivInit             =   1'b0;
 
@@ -1072,6 +1072,7 @@ always @(posedge clk) begin
                 end else if (counter == 5'b00001) begin
                     Mux_WR_Registers    =   2'b11; ////
                     Mux_WD_Registers    =   3'b101; ////
+                    Shift               =   3'b010; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
                     MDR_Load            =   1'b0;
