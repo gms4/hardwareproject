@@ -7,6 +7,6 @@ module the_box (
 ); 
 
     //concatenando
-    assign data_out = {instr_input, pc_input[31:28]};
+    assign data_out = {pc_input[31:28] , instr_input};
 
 endmodule
