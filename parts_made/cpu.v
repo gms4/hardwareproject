@@ -23,7 +23,7 @@ module cpu (
 
     //Control Wires  (Registers)
     wire            PC_Load;
-    wire            Adress_RG_Load;
+    wire            Address_RG_Load;
     wire            EPC_Load;
     wire            MDR_Load;
     wire            IR_Load;
@@ -153,11 +153,7 @@ module cpu (
         reset,
         Address_RG_Load,
         PC_Out,
-<<<<<<< HEAD
         Address_RG_Out
-=======
-        Adress_RG_Out
->>>>>>> 2e02aa338a0385ecf0fa468bd4bb8b127f698dac
     );
 
     Memoria MEM_(
@@ -522,7 +518,7 @@ module cpu (
         Mux_Address_selector,         
         Mux_WD_Registers_selector,    
 
-        Adress_RG_Load,
+        Address_RG_Load,
         EPC_Load,
         MDR_Load,
         IR_Load,
