@@ -1463,7 +1463,7 @@ always @(posedge clk) begin
                     //next state
                     states = State_Srl;
                     counter = counter + 5'b00001;
-                end else if (counter == 5'b00010) begin
+                end else if (counter == 5'b00001) begin
                     Mux_WR_Registers    =   2'b11; ////
                     Mux_WD_Registers    =   3'b101; ////
                     Shift               =   3'b011; ////
@@ -1490,7 +1490,7 @@ always @(posedge clk) begin
                     //next state
                     states = State_Srl;
                     counter = counter + 5'b00001;
-                end else if (counter == 5'b00011) begin
+                end else if (counter == 5'b00010) begin
                     Shift               =   3'b000; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
@@ -2207,8 +2207,8 @@ always @(posedge clk) begin
                     IR_Load             =   1'b0;
                     High_Load           =   1'b0;
                     Low_Load            =   1'b0;
-                    A_Load              =   1'b1; ////
-                    B_Load              =   1'b1; ////
+                    A_Load              =   1'b0;
+                    B_Load              =   1'b0; 
                     ALUOut_Load         =   1'b0;
                     Memory_WR           =   1'b0;
                     Reg_WR              =   1'b0;
