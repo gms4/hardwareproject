@@ -2508,36 +2508,8 @@ always @(posedge clk) begin
             //LUI
             State_Lui: begin
                 if (counter == 5'b00000) begin
-                    Mux_ALU1            =   2'b10; ////
-                    Mux_ALU2            =   2'b10; ////
-                    Mux_Extend          =   1'b1; ////
-                    ULA                 =   3'b001; ////
-                    Adress_RG_Load      =   1'b0;
-                    EPC_Load            =   1'b0;
-                    MDR_Load            =   1'b0;
-                    IR_Load             =   1'b0;
-                    High_Load           =   1'b0;
-                    Low_Load            =   1'b0;
-                    A_Load              =   1'b0;
-                    B_Load              =   1'b0;
-                    ALUOut_Load         =   1'b1; ////
-                    Memory_WR           =   1'b0;
-                    Reg_WR              =   1'b0;
-                    PCWrite             =   1'b0;
-                    IsBEQ               =   1'b0;
-                    IsBNE               =   1'b0;
-                    IsBLE               =   1'b0;
-                    IsBGT               =   1'b0;
-                    
-                    MultInit            =   1'b0;
-                    DivInit             =   1'b0;
-
-                    //next state
-                    states = State_Lui;
-                    counter = counter + 5'b00001;
-                end else if (counter == 5'b00001) begin
                     Mux_WR_Registers    =   2'b00; ////
-                    Mux_WD_Registers    =   3'b010; ////
+                    Mux_WD_Registers    =   3'b111; ////
                     Adress_RG_Load      =   1'b0;
                     EPC_Load            =   1'b0;
                     MDR_Load            =   1'b0;
