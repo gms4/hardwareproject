@@ -117,7 +117,7 @@ module cpu (
     wire [31:0]     Shift_Left32_32_Out;
     wire [27:0]     Shift_Left26_28_Out;
     wire [31:0]     ALU_Result;
-    wire [31:0]     Shift_Left16_32_Out;
+    wire [31:0]     Shift_Left_16_32_Out;
 
 
     Registrador PC_(
@@ -228,15 +228,15 @@ module cpu (
        High_Out,
        RegDesloc_Out,
        Sign_Extend1_32_Out,
-       Shift_Left16_32_Out,
+       Shift_Left_16_32_Out,
        Mux_WD_Registers_Out
 
     );
 
-    shift_left16_32 shift_left16_32_(
+    shift_left_16_32 shift_left_16_32_(
 
         IMMEDIATE,
-        Shift_Left16_32_Out
+        Shift_Left_16_32_Out
 
     );
 
