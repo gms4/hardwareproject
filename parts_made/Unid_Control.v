@@ -963,7 +963,7 @@ always @(posedge clk) begin
                     ALUOut_Load         =   1'b0; 
                     Memory_WR           =   1'b0;
                     Reg_WR              =   1'b0;
-                    PCWrite             =   1'b0; ////
+                    PCWrite             =   1'b1; ////
                     IsBEQ               =   1'b0;
                     IsBNE               =   1'b0;
                     IsBLE               =   1'b0;
