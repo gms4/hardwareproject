@@ -7,6 +7,7 @@ module mux_WD_Registers(
     input  wire [31:0] data_4,
     input  wire [31:0] data_5,
     input  wire [31:0] data_6,
+    input  wire [31:0] data_7,
     output wire [31:0] data_out
 );
 
@@ -86,14 +87,15 @@ data_out = data_6
 
 */
 
-wire [31:0] out1, out2, out3, out4, out5;
+wire [31:0] out1, out2, out3, out4, out5, out6;
 
 assign out1     = (selector[0]) ? data_1 : 32'd227;
 assign out2     = (selector[0]) ? data_3 : data_2;
 assign out3     = (selector[1]) ? out2   : out1;
 assign out4     = (selector[0]) ? data_5 : data_4;
-assign out5     = (selector[1]) ? data_6 : out4;
-assign data_out = (selector[2]) ? out5   : out3;
+assign out5     = (selector[0]) ? data_7 : data_6;
+assign out6     = (selector[1]) ? out5   : out4;
+assign data_out = (selector[2]) ? out6   : out3;
 
 /*
 227------| 

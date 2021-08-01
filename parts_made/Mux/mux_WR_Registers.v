@@ -42,9 +42,13 @@ data_out = data_3
 */
 
 wire [31:0] out1, out2;
+//00 data 0 ok
+//01 29 ok
+//10 31 ok
+//11 data3 ok
 
-assign out1     = (selector[0]) ? 4'd29 : data_0;
-assign out2     = (selector[0]) ? data_3[15:11] : 4'd31;
+assign out1     = (selector[0]) ? 5'd29 : data_0;
+assign out2     = (selector[0]) ? data_3[15:11] : 5'd31;
 assign data_out = (selector[1]) ? out2 : out1;
 
 endmodule
