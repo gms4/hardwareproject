@@ -226,7 +226,8 @@ module cpu (
        Low_Out,
        High_Out,
        RegDesloc_Out,
-       Sign_Extend1_32_Out
+       Sign_Extend1_32_Out,
+       Mux_WD_Registers_Out
        
 
     );
