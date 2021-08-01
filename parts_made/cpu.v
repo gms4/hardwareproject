@@ -36,7 +36,7 @@ module cpu (
     //Control Useless
     wire            NEGATIVE;
     wire            EQUAL;
-    wire            LESS;
+
 
 
     //Control Wires  (Outros)
@@ -52,10 +52,9 @@ module cpu (
     wire            IsBLE;
     wire            IsBGT;
     wire            GT;
-    wire            LT;
     wire            ZERO;
     wire            OVERFLOW;
-
+    wire            LESS;
 
     //Control Wires (Mult)
     wire            MultInit;
@@ -463,9 +462,10 @@ module cpu (
 
     );
 
+
     sign_extend1_32 sign_extend1_32_(
 
-        LT,
+        LESS,
         Sign_Extend1_32_Out
 
     );

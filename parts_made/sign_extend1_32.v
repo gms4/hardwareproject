@@ -5,7 +5,6 @@ module sign_extend1_32(
 
 );
 
-     //se o bit de sinal for 1, extenderemos só com 1s, caso contrário, 0s
-    assign data_out = data_in ? {{32{1'b1}}, data_in} : {{32{1'b0}}, data_in};
+    assign data_out = {31'b0, data_in};
 
 endmodule

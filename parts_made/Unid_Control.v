@@ -1295,7 +1295,7 @@ always @(posedge clk) begin
                     //next state
                     states = State_Sra;
                     counter = counter + 5'b00001;
-                end if (counter == 5'b00001) begin
+                end else if (counter == 5'b00001) begin
                     Mux_WR_Registers    =   2'b11; ////
                     Mux_WD_Registers    =   3'b101; ////
                     Shift               =   3'b100; ////
@@ -1379,7 +1379,7 @@ always @(posedge clk) begin
                     //next state
                     states = State_Srav;
                     counter = counter + 5'b00001;
-                end if (counter == 5'b00001) begin
+                end else if (counter == 5'b00001) begin
                     Mux_WR_Registers    =   2'b11; ////
                     Mux_WD_Registers    =   3'b101; ////
                     Shift               =   3'b100; ////
